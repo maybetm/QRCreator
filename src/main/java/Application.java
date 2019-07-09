@@ -7,8 +7,10 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.sun.xml.internal.ws.streaming.XMLStreamWriterException;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
@@ -59,7 +61,11 @@ public class Application
         }
       }
     }
-    ImageIO.write(image, fileType, qrFile);
+
+    try (ByteArrayOutputStream os = new ByteArrayOutputStream(matrixWidth * matrixWidth)) {
+      ImageIO.write(image, fileType, os);
+      System.out.println("base64:" + DatatypeConverter.printBase64Binary(os.toByteArray()));
+    }
   }
 
 }
