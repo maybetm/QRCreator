@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Hashtable;
 
 /**
@@ -62,10 +62,9 @@ public class Application
       }
     }
 
-    try (ByteArrayOutputStream os = new ByteArrayOutputStream(matrixWidth * matrixWidth)) {
-      ImageIO.write(image, fileType, os);
-      System.out.println("base64:" + DatatypeConverter.printBase64Binary(os.toByteArray()));
-    }
+    ImageIO.write(image, fileType, qrFile);
+    System.out.println("bytes:" + DatatypeConverter.printBase64Binary(Files.readAllBytes(qrFile.toPath())));
+
   }
 
 }
