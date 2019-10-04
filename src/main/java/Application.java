@@ -22,6 +22,8 @@ import java.util.Hashtable;
 public class Application
 {
 
+  public static final String revertPlease = "ОТКАТИ МЕНЯ ПОЖАЛУЙСТА. Я ТУТ НЕ НУЖНА, ЗАЙКА";
+
   public static void main(String[] args) throws IOException, XMLStreamWriterException, WriterException
   {
     String qrCodeText = "https://www.google.com/";
